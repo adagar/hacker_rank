@@ -12,15 +12,34 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System;
 
-class Solution {
+class Solution
+{
 
     // Complete the divisibleSumPairs function below.
-    static int divisibleSumPairs(int n, int k, int[] ar) {
-
-
+    static int divisibleSumPairs(int n, int k, int[] ar)
+    {
+        int count = 0;
+        for (int i = 0; i < ar.Length; i++)
+        {
+            for (int j = 0; j < ar.Length; j++)
+            {
+                if (i == j)
+                {
+                    continue;
+                }
+                if ((ar[j] + ar[i]) % k == 0)
+                {
+                    Console.WriteLine("Match! " + ar[i] + " and " + ar[j]);
+                    count++;
+                }
+            }
+            //Console.WriteLine(ar[i]);
+        }
+        return count / 2;
     }
 
-    static void Main(string[] args) {
+    static void Main(string[] args)
+    {
         TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
 
         string[] nk = Console.ReadLine().Split(' ');
