@@ -17,6 +17,19 @@ class Solution {
     // Complete the designerPdfViewer function below.
     static int designerPdfViewer(int[] h, string word) {
         //find largest 
+        var width = word.Length;
+        
+        var tallest = 0;
+        foreach(var letter in word)
+        {
+            var index = char.ToUpper(letter) - 65;
+            if(h[index] > tallest)
+            {
+                tallest = h[index];
+            }
+        }
+        return width * tallest;
+        
 
     }
 
