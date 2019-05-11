@@ -9,18 +9,22 @@ function removeKFromList(l, k) {
   let origHead = l;
   let newHead = origHead;
   if (origHead && origHead.value) {
-    if (origHead.value === k) {
+    while (origHead.value === k) {
       origHead = origHead.next;
+      newHead = origHead;
     }
-    let next = origHead.next;
-    while (next !== null) {
-      if (next.value === k) {
-        newHead.next = next.next;
-      } else {
-        newHead = next;
-        next = next.next;
-      }
+    while (newHead.next) {
+      newHead.next = getNext(newHead, k);
+      newHead = newHead.next;
     }
   }
   return origHead;
 }
+
+const getNext = (node, k) => {
+  if (node.next !== k) {
+    return node.next;
+  } else {
+    return getNext(node.next, k);
+  }
+};
