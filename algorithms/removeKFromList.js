@@ -5,26 +5,45 @@
 // }
 //
 function removeKFromList(l, k) {
-  console.log(l);
-  let origHead = l;
-  let newHead = origHead;
-  if (origHead && origHead.value) {
-    while (origHead.value === k) {
-      origHead = origHead.next;
-      newHead = origHead;
+  /*
+    console.log(l);
+  let head = l;
+  if (head && head.value) {
+      console.log(head);
+    while(head.value === k) {
+        console.log("bad start");
+        head = deleteFirstNode(head);
     }
-    while (newHead.next) {
-      newHead.next = getNext(newHead, k);
-      newHead = newHead.next;
+  let tail = head.next; 
+    while(head.next){
+        tail = getNext(head, k);
+        head = tail;
     }
   }
-  return origHead;
+  return head;
+  */
+  for (let i = 0; i < l.length; i++) {
+    if (l[i] === k) {
+      l.splice(i, 1);
+      i--;
+    }
+  }
+  return l;
 }
-
+/*
+const deleteFirstNode = (head) => {
+    if(!origHead){
+        return;
+    } else {
+        head = head.next;
+        return head;
+    }
+}
 const getNext = (node, k) => {
-  if (node.next !== k) {
-    return node.next;
-  } else {
-    return getNext(node.next, k);
-  }
-};
+    if(node.next !== k){
+        return node.next;
+    } else {
+        return getNext(node.next, k);
+    }
+}
+*/
