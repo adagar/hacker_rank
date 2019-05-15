@@ -1,51 +1,17 @@
-//
-// Definition for binary tree:
-// function Tree(x) {
-//   this.value = x;
-//   this.left = null;
-//   this.right = null;
-// }
-function hasPathWithGivenSum(t, s) {
-    let sumList = [];
-    if(t){
-        if(t.left){
-            sumList.concat(getSum(t.left).map(
-                x => { return addOrigVal(x, t.value)}
-            ));
-        }
-        if(t.right){
-            sumList.concat(getSum(t.right).map(
-                x => { return addOrigVal(x, t.value)}));
-        }
-        /*
-        if(!t.right && !t.left){
-            sumList.concat(t.value);
-        }
-        */
-        console.log(sumList);
-        for(let i = 0; i < sumList.length; i++){
-             if(sumList[i] === s){
-                 return true;
-             }   
-        }
-    }
-    return false;
-}
+hasPathWithGivenSum = (t, s) => {
+  if (!t) return s === 0; //if there isn't a tree, just check if we're NOT supposed to even have a sum
+  return traverse(t, s);
+};
 
-const addOrigVal = (val, add) => {
-    return val + add;
-}
-
-const getSum = (node) => {
-    //console.log("Node value:",node);
-    let childList = [];
-    if(node.left === null && node.right === null){
-        childList.push(;
-    }if(node.left){
-        childList.push(node.value + parseInt(getSum(node.left)));
-    }if(node.right){
-        childList.push(node.value + parseInt(getSum(node.right)));
-    }
-    console.log(childList);
-    return childList;
-}
+const traverse = (t, s) => {
+  //we've been counting down S on values, so if this is a leaf, and the right amount is remaining, we're good!
+  if (t.left === null && t.right === null && t.value === s) {
+    return true;
+  }
+  //knock down value by what we've traversed on this branch
+  s = s - t.value;
+  //check the paths going forward
+  return (
+    (!!t.left && !!traverse(t.left, s)) || (!!t.right && !!traverse(t.right, s))
+  );
+};
