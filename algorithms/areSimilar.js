@@ -1,30 +1,16 @@
 function areSimilar(a, b) {
-    let isSwapped = false;
-    
+    let swapIndex = [];
     for(let i = 0; i < a.length; i++){
-        if(a[i] === b[i]){
-            continue;
-        } else {
-            if(isSwapped){
-                console.log("Already did a swap");
-                console.log(a, b);
-               return false; 
-            } else{
-                let aLoc = a.indexOf(b[i]);
-                let bLoc = b.indexOf(a[aLoc]);
-                if(aLoc < 0 || bLoc < 0){
-                    console.log("Couldn't find aLoc or bLoc");
-                    return false;
-                } else{
-                    let tmp = b[i];
-                    b[i] = b[aLoc];
-                    b[aLoc] = tmp;
-                    isSwapped = true;
-                    i--;
-                    console.log(b);
-                }
-            }
+        if(a[i] !== b[i]){
+            swapIndex.push(i);
         }
     }
-    return true;
+    
+    if(swapIndex.length === 0) return true;
+    if(swapIndex.length > 2) return false;
+    if(a[swapIndex[0]] === b[swapIndex[1]] && b[swapIndex[0]] === a[swapIndex[1]]){
+        return true;
+    }
+    return false;
 }
+    
